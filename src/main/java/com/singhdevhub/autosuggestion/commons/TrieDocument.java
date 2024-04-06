@@ -14,6 +14,5 @@ public class TrieDocument {
     @Id
     private String userId;
 
-
     private Trie trie;
 }

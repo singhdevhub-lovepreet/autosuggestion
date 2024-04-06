@@ -2,7 +2,6 @@ package com.singhdevhub.autosuggestion.controller;
 
 import com.singhdevhub.autosuggestion.service.RedisService;
 import com.singhdevhub.autosuggestion.service.TrieService;
-import com.singhdevhub.autosuggestion.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +21,7 @@ public class SuggestionController
     @Autowired
     private RedisService redisService;
 
-    @PostMapping(path = "/v1/suggest")
+    @PostMapping(path = "/v1/suggest") // call on hitting space
     public ResponseEntity<String> getSuggestion(@PathVariable(value = "userId") String userId, @RequestBody String code){
         try{
             List<String> words = trieService.getWords(code);
@@ -32,7 +31,5 @@ public class SuggestionController
             return new ResponseEntity<>("Exception in trie service", HttpStatus.BAD_REQUEST);
         }
     }
-
-
 
 }

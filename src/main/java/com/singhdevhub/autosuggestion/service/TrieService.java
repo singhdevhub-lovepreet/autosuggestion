@@ -3,12 +3,14 @@ package com.singhdevhub.autosuggestion.service;
 import com.singhdevhub.autosuggestion.model.Node;
 import com.singhdevhub.autosuggestion.model.Trie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
+@Service
 public class TrieService
 {
 

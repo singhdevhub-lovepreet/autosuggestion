@@ -1,0 +1,9 @@
+.idea/modules
+.idea/sonarlint
+.gradle/
+.idea/
+out/
+src/**/.DS*
+build/
+*.iml.env
+.env

@@ -20,14 +20,19 @@ public class TrieService
 
     public boolean createAndSaveTrie(String code, String userId){
         Trie trieFromRedis = new Trie(); // we will get Trie from redis
-        Pattern pattern = Pattern.compile("\\s+", Pattern.DOTALL);
-        String[] parts = pattern.split(code);
-        if(insert(Arrays.stream(parts).toList(), trieFromRedis)){
+        List<String> words = getWords(code);
+        if(insert(words, trieFromRedis)){
             redisService.updateDataInRedis(userId, trieFromRedis);
             mongoDBService.saveData(userId, trieFromRedis);
             return true;
         }
         return false;
+    }
+
+    public List<String> getWords(String code){
+        Pattern pattern = Pattern.compile("\\s+", Pattern.DOTALL);
+        String[] parts = pattern.split(code);
+        return Arrays.stream(parts).toList();
     }
 
     public Trie getTrieReference(List<String> words, Trie root){

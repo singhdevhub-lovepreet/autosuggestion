@@ -22,8 +22,8 @@ public class WebsocketHandler
     @Autowired
     private TrieService trieService;
 
-    @MessageMapping("/suggest")
-    @SendTo("/topic/suggestions")
+    @MessageMapping("/chat")
+    @SendTo("/topic/messages")
     public void handleMessage(WebSocketSession session, WebSocketMessage<?> message)
             throws IOException
     {

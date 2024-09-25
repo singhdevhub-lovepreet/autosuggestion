@@ -1,5 +1,5 @@
 
-r
-java:S1149	"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(’΄Σϋÿÿÿÿÿ8ƒ§ϊήδ1
-W
-java:S1118":Add a private constructor to hide the implicit public one.(¨¶β¦8ƒ§ϊήδ1
+
+java:S1149	"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(’΄Σϋÿÿÿÿÿ8ƒ§ϊήδ1J$01408349-e63b-44c2-aab9-e84465c68e41
+}
+java:S1118":Add a private constructor to hide the implicit public one.(¨¶β¦8ƒ§ϊήδ1J$edc4e673-b9ef-4160-9726-286d4184e899

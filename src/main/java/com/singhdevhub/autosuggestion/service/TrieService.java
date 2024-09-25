@@ -21,7 +21,7 @@ public class TrieService
     private MongoDBService mongoDBService;
 
     public boolean createAndSaveTrie(String code, String userId){
-        Trie trieFromRedis = new Trie(); // we will get Trie from redis
+        Trie trieFromRedis = new Trie();
         List<String> words = getWords(code);
         if(insert(words, trieFromRedis)){
             redisService.updateDataInRedis(userId, trieFromRedis);
@@ -39,6 +39,9 @@ public class TrieService
 
     public Trie getTrieReference(List<String> words, Trie root){
         Trie retTrie = null;
+        if(Objects.isNull(root) || Objects.isNull(root.getNext())){
+            return new Trie();
+        }
         List<Trie> trieList = root.getNext();
         for(String word: words){
             if(trieList.isEmpty()){
@@ -63,7 +66,7 @@ public class TrieService
             if(Objects.isNull(trie) || Objects.isNull(trie.getNext())){
                 return referenceTrie.toString();
             }
-            retVal.append(trie.getNode().getWord());
+            retVal.append(trie.getNode().getWord()).append(" ");
             referenceTrie = trie;
         }
         return retVal.toString();
@@ -73,17 +76,18 @@ public class TrieService
         try{
             Trie refTrie = getTrieReference(words, root);
             refTrie.setNext(List.of(new Trie()));
-            Trie tempTrie = refTrie.getNext().get(0);
+            Trie tempTrie = refTrie.getNext().getFirst();
 
             for(String word: words){
                 tempTrie.setNode(new Node(word, 1L));
                 tempTrie.setNext(List.of(new Trie()));
                 tempTrie = tempTrie.getNext().get(0);
+                return true;
             }
         }catch (Exception ex){
             return false;
         }
-        return true;
+        return false;
     }
 
     private Long increasePriority(Long priority){

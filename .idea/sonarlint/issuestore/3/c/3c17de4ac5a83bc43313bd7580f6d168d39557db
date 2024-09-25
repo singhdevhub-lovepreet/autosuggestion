@@ -1,7 +1,11 @@
 
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8¬Ÿ¬Öå1J$02361ff7-47b8-4d80-adcf-a48778426071
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8€¡Õ¯¢2J$81ef5500-ae75-4555-a19b-9c88ff9a35cb
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8¬Ÿ¬Öå1J$c96109f4-c02e-4396-9d54-50bd63c47cc2
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄÞ8€¡Õ¯¢2J$097813cc-eb9b-4703-a714-c0c61f5cc099
+„
+java:S1854T"<Remove this useless assignment to local variable "tempTrie".(ð ”ïùÿÿÿÿ8•·ã¯¢2J$1b749f42-a7cf-460a-93b5-138af2848fb9
+y
+java:S1751U"6Remove this "return" statement or make it conditional.(§¼Éç8™·ã¯¢2J$614d5085-f86f-456b-bca7-094e10c2aa0e
 z
-java:S1135]"2Complete the task associated to this TODO comment.(“Ï¼ƒüÿÿÿÿ8´Ÿ¬Öå1J$36e0cdb2-12fa-4777-aede-07d4b813e9ee
+java:S1135a"2Complete the task associated to this TODO comment.(“Ï¼ƒüÿÿÿÿ8†¡Õ¯¢2J$8df79760-1244-4ac1-8e06-21b47d5c35cd

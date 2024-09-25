@@ -7,13 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 
 import java.io.IOException;
 
-@Controller
+@RestController
+@RequestMapping("autosuggestion/")
 public class WebsocketHandler
 {
 
@@ -22,16 +27,17 @@ public class WebsocketHandler
     @Autowired
     private TrieService trieService;
 
-    @MessageMapping("/chat")
-    @SendTo("/topic/messages")
-    public void handleMessage(WebSocketSession session, WebSocketMessage<?> message)
+//    @MessageMapping("/chat")
+//    @SendTo("/topic/messages")
+    @PostMapping(value = "/postCode")
+    public void handleMessage(@RequestBody MessageRequest request)
             throws IOException
     {
-        MessageRequest messageRequest = objectMapper.convertValue(message.getPayload(), MessageRequest.class);
-        String code = messageRequest.getCode();
-        String userId = messageRequest.getUserId();
+//        MessageRequest messageRequest = objectMapper.convertValue(message.getPayload(), MessageRequest.class);
+        String code = request.getCode();
+        String userId = request.getUserId();
         trieService.createAndSaveTrie(code, userId);
-        session.sendMessage(new TextMessage("Message Saved....."));
+//        session.sendMessage(new TextMessage("Message Saved....."));
     }
 
 }

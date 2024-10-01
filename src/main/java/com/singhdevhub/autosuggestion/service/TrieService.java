@@ -3,11 +3,10 @@ package com.singhdevhub.autosuggestion.service;
 import com.singhdevhub.autosuggestion.model.Node;
 import com.singhdevhub.autosuggestion.model.Trie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.regex.Pattern;
 
 @Service
@@ -21,11 +20,15 @@ public class TrieService
     private MongoDBService mongoDBService;
 
     public boolean createAndSaveTrie(String code, String userId){
-        Trie trieFromRedis = new Trie();
+        Trie trieFromRedisOrMongo = redisService.getDataFromRedis(userId);
+        if(Objects.isNull(trieFromRedisOrMongo)){
+            trieFromRedisOrMongo = mongoDBService.getData(userId);
+        }
         List<String> words = getWords(code);
-        if(insert(words, trieFromRedis)){
-            redisService.updateDataInRedis(userId, trieFromRedis);
-            mongoDBService.saveData(userId, trieFromRedis);
+        Trie insertedTrie = insert(words, trieFromRedisOrMongo);
+        if(Objects.nonNull(insertedTrie)){
+            redisService.updateDataInRedis(userId, insertedTrie);
+            mongoDBService.saveData(userId, insertedTrie);
             return true;
         }
         return false;
@@ -37,13 +40,15 @@ public class TrieService
         return Arrays.stream(parts).toList();
     }
 
-    public Trie getTrieReference(List<String> words, Trie root){
+    public Pair<Trie, Integer> getTrieReference(List<String> words, Trie root){
         Trie retTrie = null;
         if(Objects.isNull(root) || Objects.isNull(root.getNext())){
-            return new Trie();
+            return Pair.of(new Trie(), -1);
         }
         List<Trie> trieList = root.getNext();
+        int index = -1;
         for(String word: words){
+            index++;
             if(trieList.isEmpty()){
                 break;
             }
@@ -56,38 +61,51 @@ public class TrieService
                 }
             }
         }
-        return retTrie;
+        return Pair.of(retTrie, index);
     }
 
     public String find(List<String> words, Trie root){
-        Trie referenceTrie = getTrieReference(words, root);
+        Pair<Trie, Integer> referenceTrieWithWordIndex = getTrieReference(words, root);
+        Trie referenceTrie = referenceTrieWithWordIndex.getFirst();
         StringBuilder retVal = new StringBuilder();
-        for(Trie trie: referenceTrie.getNext()){
-            if(Objects.isNull(trie) || Objects.isNull(trie.getNext())){
-                return referenceTrie.toString();
-            }
-            retVal.append(trie.getNode().getWord()).append(" ");
-            referenceTrie = trie;
+
+        while(Objects.nonNull(referenceTrie) && Objects.nonNull(referenceTrie.getNext())){
+            retVal.append(referenceTrie.getNode().getWord()).append(" ");
+            referenceTrie = referenceTrie.getNext().getFirst();
         }
         return retVal.toString();
     }
 
-    public boolean insert(List<String> words, Trie root){
+    public Trie insert(List<String> words, Trie root){
         try{
-            Trie refTrie = getTrieReference(words, root);
+            Trie refTrie;
+            if(Objects.isNull(root)){
+                root = new Trie();
+                refTrie = root;
+            }else{
+                Pair<Trie, Integer> trieWithWordIndex = getTrieReference(words, root);
+                if(trieWithWordIndex.getSecond().equals(words.size()-1)){
+                    return root;
+                }
+                refTrie = trieWithWordIndex.getFirst();
+            }
+
             refTrie.setNext(List.of(new Trie()));
+            if(Objects.isNull(refTrie.getNode())){
+                refTrie.setNode(new Node("root", 1L));
+            }
             Trie tempTrie = refTrie.getNext().getFirst();
 
             for(String word: words){
                 tempTrie.setNode(new Node(word, 1L));
-                tempTrie.setNext(List.of(new Trie()));
-                tempTrie = tempTrie.getNext().get(0);
-                return true;
+                List<Trie> nextTries = Optional.of(tempTrie.getNext()).orElse(new ArrayList<>());
+                nextTries.add(new Trie());
+                tempTrie = tempTrie.getNext().getLast();
             }
+            return root;
         }catch (Exception ex){
-            return false;
+            return null;
         }
-        return false;
     }
 
     private Long increasePriority(Long priority){

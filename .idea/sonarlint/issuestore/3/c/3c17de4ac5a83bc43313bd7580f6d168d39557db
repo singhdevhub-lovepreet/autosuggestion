@@ -1,11 +1,9 @@
 
+Ñ
+java:S4449@"ˆAnnotate the parameter with @javax.annotation.Nullable in method 'of' declaration, or make sure that null can not be passed as argument.( Àåùÿÿÿÿ8§ß¿Î¤2J$061a8b1c-566c-4e41-b6c3-0e3c24865a9f
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8€¡Õ¯¢2J$81ef5500-ae75-4555-a19b-9c88ff9a35cb
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¨ß¿Î¤2J$cb83d30f-a401-4c9e-b307-8b2b112d2ab2
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8€¡Õ¯¢2J$097813cc-eb9b-4703-a714-c0c61f5cc099
-„
-java:S1854T"<Remove this useless assignment to local variable "tempTrie".(ğ ”ïùÿÿÿÿ8•·ã¯¢2J$1b749f42-a7cf-460a-93b5-138af2848fb9
-y
-java:S1751U"6Remove this "return" statement or make it conditional.(§¼Éç8™·ã¯¢2J$614d5085-f86f-456b-bca7-094e10c2aa0e
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¨ß¿Î¤2J$c517f03b-10be-4e8c-8978-41e02ee89d35
 z
-java:S1135a"2Complete the task associated to this TODO comment.(“Ï¼ƒüÿÿÿÿ8†¡Õ¯¢2J$8df79760-1244-4ac1-8e06-21b47d5c35cd
+java:S1135s"2Complete the task associated to this TODO comment.(“Ï¼ƒüÿÿÿÿ8µß¿Î¤2J$ad95d8a8-ed54-4516-8666-c647a3b4c5a5

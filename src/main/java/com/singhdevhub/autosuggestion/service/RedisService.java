@@ -16,7 +16,7 @@ public class RedisService
     }
 
     public void updateDataInRedis(String key, Trie data) {
-        redisTemplate.opsForValue().set(key, data);
+       redisTemplate.opsForValue().set(key, data);
     }
 
 }

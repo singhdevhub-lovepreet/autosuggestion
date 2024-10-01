@@ -27,8 +27,6 @@ Fsrc/main/java/com/singhdevhub/autosuggestion/config/MongoDBConfig.java,6/c/6c6
 Qsrc/main/java/com/singhdevhub/autosuggestion/controller/SuggestionController.java,f/9/f9eab3279ae887b1863f79c6d46693aad2e9a808
 v
 Fsrc/main/java/com/singhdevhub/autosuggestion/utils/ValidationUtil.java,c/8/c84c1af5a7c3ecf2b2c9d19416021c0e0e54812a
-x
-Hsrc/main/java/com/singhdevhub/autosuggestion/config/WebsocketConfig.java,6/d/6d2af3072fd8b242605165a23e07ed512182c6b3
 z
 Jsrc/main/java/com/singhdevhub/autosuggestion/handler/WebsocketHandler.java,3/f/3f3f95794719688b9e609863b55e2246040ab461
 v

@@ -4,7 +4,6 @@ import java.util.Stack;
 
 public class ValidationUtil
 {
-
     public static boolean validParentheses(String code){
         Stack<Character> paranthesesStack = new Stack<>();
         for(int i = 0; i < code.length(); i++){

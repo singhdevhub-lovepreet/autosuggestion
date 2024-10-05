@@ -3,6 +3,7 @@ package com.singhdevhub.autosuggestion.controller;
 import com.singhdevhub.autosuggestion.commons.MessageRequest;
 import com.singhdevhub.autosuggestion.service.RedisService;
 import com.singhdevhub.autosuggestion.service.TrieService;
+import com.singhdevhub.autosuggestion.utils.ValidationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

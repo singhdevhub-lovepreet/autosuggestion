@@ -1,5 +1,7 @@
 
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8µœ®Öå1J$9a2b3bb8-215a-4ee5-8b8d-d681c08cd189
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8æ˜…ö¥2J$8ea912a1-fa8e-4c55-8ebb-566193ee69c8
 …
-java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8¶œ®Öå1J$c33cfa56-6295-4872-9472-0c53c62e1ec0
+java:S6813"BRemove this field injection and use constructor injection instead.(êæÄŞ8æ˜…ö¥2J$251732cb-adc2-4727-8b2d-9fc46d510bb1
+r
+java:S1128"PRemove this unused import 'com.singhdevhub.autosuggestion.utils.ValidationUtil'.(È”Òúÿÿÿÿ8½ö¥2

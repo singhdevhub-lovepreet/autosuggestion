@@ -1,0 +1,27 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "java",
+        "name": "Launch AutoSuggestion",
+        "request": "launch",
+        "mainClass": "com.singhdevhub.autosuggestion.AutosuggestionApplication",
+        "projectName": "AutoSuggestion",
+        "cwd": "/Users/lovepreetsingh/Desktop/autosuggestion",
+        "env": {},
+        "vmArgs": "--enable-preview -Djava.version=21",
+        "args": []
+      },
+      {
+        "type": "java",
+        "name": "Spring Boot-AutosuggestionApplication<autosuggestion>",
+        "request": "launch",
+        "cwd": "${workspaceFolder}",
+        "mainClass": "com.singhdevhub.autosuggestion.AutosuggestionApplication",
+        "projectName": "autosuggestion",
+        "args": "",
+        "envFile": "${workspaceFolder}/.env"
+      }
+    ]
+  }
+  

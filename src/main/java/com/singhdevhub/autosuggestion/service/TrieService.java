@@ -35,7 +35,7 @@ public class TrieService
     }
 
     public List<String> getWords(String code){
-        Pattern pattern = Pattern.compile("\\s+", Pattern.DOTALL);
+        Pattern pattern = Pattern.compile(" ");
         String[] parts = pattern.split(code);
         return Arrays.stream(parts).toList();
     }
@@ -46,14 +46,14 @@ public class TrieService
             return Pair.of(new Trie(), -1);
         }
         List<Trie> trieList = root.getNext();
-        int index = -1;
+        int index = 0;
         for(String word: words){
-            index++;
             if(trieList.isEmpty()){
                 break;
             }
             for(Trie trie: trieList){
                 if(word.equals(trie.getNode().getWord())){
+                    index++;
                     trie.getNode().setPriority(increasePriority(trie.getNode().getPriority()));
                     trieList = trie.getNext();
                     retTrie = trie;
@@ -69,7 +69,7 @@ public class TrieService
         Trie referenceTrie = referenceTrieWithWordIndex.getFirst();
         StringBuilder retVal = new StringBuilder();
 
-        while(Objects.nonNull(referenceTrie) && Objects.nonNull(referenceTrie.getNext())){
+        while(Objects.nonNull(referenceTrie) && Objects.nonNull(referenceTrie.getNode()) && Objects.nonNull(referenceTrie.getNext())){
             retVal.append(referenceTrie.getNode().getWord()).append(" ");
             referenceTrie = referenceTrie.getNext().getFirst();
         }
@@ -79,24 +79,23 @@ public class TrieService
     public Trie insert(List<String> words, Trie root){
         try{
             Trie refTrie;
+            int startFromIndexOfWord = 0;
             if(Objects.isNull(root)){
                 root = new Trie();
                 refTrie = root;
             }else{
                 Pair<Trie, Integer> trieWithWordIndex = getTrieReference(words, root);
-                if(trieWithWordIndex.getSecond().equals(words.size()-1)){
-                    return root;
-                }
                 refTrie = trieWithWordIndex.getFirst();
+                startFromIndexOfWord = trieWithWordIndex.getSecond();
             }
 
-            refTrie.setNext(List.of(new Trie()));
+            refTrie.getNext().add(new Trie());
             if(Objects.isNull(refTrie.getNode())){
                 refTrie.setNode(new Node("root", 1L));
             }
-            Trie tempTrie = refTrie.getNext().getFirst();
+            Trie tempTrie = refTrie.getNext().getLast();
 
-            for(String word: words){
+            for(String word: words.subList(startFromIndexOfWord, words.size())){
                 tempTrie.setNode(new Node(word, 1L));
                 List<Trie> nextTries = Optional.of(tempTrie.getNext()).orElse(new ArrayList<>());
                 nextTries.add(new Trie());
